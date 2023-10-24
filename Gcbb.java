@@ -1,18 +1,26 @@
 import java.util.Scanner;
 
-public class Gcbb{
+public class Main{
   public static void main(String args[]) {
     HondaMotorcycle a[] = new HondaMotorcycle[2];
+    
     a[0] = new HondaMotorcycle("Beat", 64000, "Scooter", 1);
     a[1] = new HondaMotorcycle("Click", 72000, "Scooter", 3);
     
     Scanner scanner = new Scanner(System.in);
     
+    System.out.println("***************************************");
+    System.out.println("* Honda Motorcycle Dealership Program *");
+    System.out.println("***************************************");
+    System.out.println();
+    
     while (true) {
       int choice = menu(scanner);
       switch (choice) {
         case 0:
+          System.out.println("Model, Price, Category");
           list(a);
+          System.out.println();
           break;
         case 1:
           System.out.println("[0] Search by Model");
@@ -22,12 +30,20 @@ public class Gcbb{
           System.out.print("Choice: ");
           int x = scanner.nextInt();
           scanner.nextLine();
+          System.out.println();
           if (x == 0) {
             System.out.print("Enter model: ");
             String model = scanner.nextLine();
+            System.out.println();
             int h = searchModel(model, a);
-            if (h < 0) break;
-            System.out.println(a[h].getModel() + ", ₱" + a[h].getPrice() + ", " + a[h].getType());
+            if (h < 0) {
+            	System.out.println("Model not found.");
+                System.out.println();
+                break;
+            }
+            System.out.println("Model, Price, Category, Available");
+            System.out.println(a[h].getModel() + ", ₱" + a[h].getPrice() + ", " + a[h].getType() + ", " + a[h].getAvailability());
+            System.out.println();
           } else if (x == 1) {
             System.out.print("Enter price floor: ");
             int min = scanner.nextInt();
@@ -35,22 +51,36 @@ public class Gcbb{
             System.out.print("Enter price ceiling: ");
             int max = scanner.nextInt();
             scanner.nextLine();
-            list(searchPriceRange(min, max, a));
+            System.out.println();
+            HondaMotorcycle m[] = searchPriceRange(min, max, a);
+            if (m.length == 0) {
+            	System.out.println("No models of that price range is available.");
+                System.out.println();
+                break;
+            }
+            System.out.println("Model, Price, Category");
+            list(m);
+            System.out.println();
           } else if (x == 2) {
             System.out.print("Enter type: ");
             String model = scanner.nextLine();
+            System.out.println();
             HondaMotorcycle h[] = searchType(model, a);
             if (h.length <= 0) {
               System.out.println("Nothing of that type found has been found.");
               break;
             }
+            System.out.println("Model, Price, Category");
             list(h);
+            System.out.println();
           }
           break;
         case 2:
           System.out.print("Model: ");
           String s = scanner.nextLine();
+          System.out.println();
           buy(s, a);
+          System.out.println();
           break;
         case 3:
           System.out.println("Thank you!");
@@ -67,8 +97,10 @@ public class Gcbb{
     System.out.print("Choice: ");
     int choice = scanner.nextInt();
     scanner.nextLine();
+    System.out.println();
     if (choice < 0 || choice > 3) {
       System.out.println("Invalid choice!");
+      System.out.println();
       return menu(scanner);
     }
     return choice;
