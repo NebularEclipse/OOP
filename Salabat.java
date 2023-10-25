@@ -76,7 +76,7 @@ public class Salabat {
                 break;
             }
             System.out.println("Model, Price, Category, Available");
-            System.out.println(a[h].getModel() + ", PHP " + a[h].getPrice() + ", " + a[h].getType() + ", " + a[h].getAvailability());
+            System.out.println(a[h].getModel() + ", ₱" + a[h].getPrice() + ", " + a[h].getType() + ", " + a[h].getAvailability());
             System.out.println();
           } else if (x == 1) {
             System.out.print("Enter price floor: ");
@@ -144,7 +144,7 @@ public class Salabat {
   public static void list(HondaMotorcycle m[]) {
     for (int i = 0; i < m.length; i++) {
       if (m[i].getAvailability()) {
-        System.out.println(m[i].getModel() + ", PHP " + m[i].getPrice() + ", " + m[i].getType());
+        System.out.println(m[i].getModel() + ", ₱" + m[i].getPrice() + ", " + m[i].getType());
       }
     }
   }
@@ -197,6 +197,7 @@ public class Salabat {
       if (m[i].getModel().equals(model)){
         if (m[i].getAvailability()) {
           m[i].setStock(m[i].getStock() - 1);
+          System.out.println("That would be PHP " + m[i].getPrice() + ".");
           System.out.println("Thank you for your patronage!");
         } else {
           System.out.println("I'm sorry, there's no available stock for that model.");
