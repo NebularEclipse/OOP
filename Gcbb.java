@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Main{
+public class SaLaBat{
   public static void main(String args[]) {
     HondaMotorcycle a[] = new HondaMotorcycle[31];
     
